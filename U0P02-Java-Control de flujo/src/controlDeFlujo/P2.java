@@ -28,10 +28,11 @@ public class P2 {
 		//		l.Do_while();
 		//		l.While();
 		//		l.For();
-		
-		Menu men = new Menu();
-		
-		men.menu0();
+		//
+		//Menu men = new Menu();
+		//
+		//men.menu0();
+		System.out.println("PC09");
 	}
 
 	
