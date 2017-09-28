@@ -9,11 +9,21 @@ public class Loops {
 
 	private static int numero() {
 		Scanner sc = new Scanner(System.in);
-		int num;
-		System.out.println("Introduce un numero.");
-		num = sc.nextInt();
+		int num=Integer.MAX_VALUE;
 
-		return num;
+		do {
+
+		try {
+
+			System.out.println("Introduce un numero.");
+			num = sc.nextInt();
+		} catch (Exception e) {
+			sc = new Scanner(System.in);		
+		}
+		} while (num==Integer.MAX_VALUE);
+						return num;
+
+
 	}
 
 	public static void Do_while() {

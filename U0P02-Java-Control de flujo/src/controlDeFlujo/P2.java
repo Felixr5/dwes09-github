@@ -14,7 +14,7 @@ public class P2 {
 		//		Suma sum = new Suma();		
 		//		sum.SumaNums();
 		//
-		//		Numeros num = new Numeros();
+		//	Numeros num = new Numeros();
 		//		num.pedirNumNoLetra();
 		//		num.pedirNum1_10();
 		//		Calendario cal = new Calendario();
@@ -24,15 +24,14 @@ public class P2 {
 		//
 		//		inc.numeros();
 		
-		//		Loops l = new Loops();
-		//		l.Do_while();
+			//	Loops l = new Loops();
+			//	l.Do_while();
 		//		l.While();
 		//		l.For();
 		//
 		//Menu men = new Menu();
 		//
 		//men.menu0();
-		System.out.println("PC09");
 	}
 
 	
