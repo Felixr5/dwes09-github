@@ -247,7 +247,7 @@ public static void cal() {
 				System.out.println("Febrero tiene 28 días.");
 			break;
 
-		case 3:
+          case 3:
 			System.out.println("Marzo tiene 31 días");
 			break;
 
@@ -687,16 +687,169 @@ Ba
 
 9) (opcional) Inventa un problema sencillo sobre estructuras de control de flujo. Resuélvelo para comprobar que el nivel de dificultad es adecuado y comparte el enunciado con tu compañer@ de al lado. Incluye aquí tanto tu enunciado como la solución.
 
-- *Enunciado*:
+- *Enunciado*:	 Dada una cadena por teclado, decidir si es palíndroma (se lee igual de izquierda a derecha que de derecha a izquierda).
+- *Código de la solución*:
 
-- *Código de la solución*
+
+```java
+public static void main(String[] args) {
+		// Dada una cadena por teclado, decidir si es palíndroma, es decir si
+		// se lee igual de izquierda a derecha que de derecha a izquierda.
+		Scanner sc = new Scanner(System.in);
+		String cadena;
+		System.out.println("Introduce la cadena");
+		cadena = sc.nextLine().toLowerCase();
+		cadena = quitarEspacios(cadena);
+		palindroma(cadena);
+	}
+
+	static public String quitarEspacios(String cadena) {
+		int espacio = -1, aux = -1, c = 0;
+		String cadenaAux = cadena;
+		for (int i = 0; i < cadena.length() && espacio == -1; i++) {
+			c += 1;
+			if (cadena.charAt(i) == ' ') {
+				espacio = i;
+				aux = i;
+				cadenaAux = cadena.substring(0, i);
+				break;
+			}
+		}
+		do {
+			espacio = -1;
+			for (int i = aux + 1; i < cadena.length() && espacio == -1; i++) {
+				c += 1;
+				if (cadena.charAt(i) == ' ') {
+					espacio = i;
+					cadenaAux += cadena.substring(aux + 1, i);
+					aux = i;
+					break;
+				}
+				if (cadena.charAt(i) != ' ' && i == (cadena.length() - 1) && cadena!=cadenaAux) {
+					cadenaAux += cadena.substring(aux + 1, c);
+					break;
+				}
+			}
+		} while (c < cadena.length());
+		return cadenaAux;
+	}
+
+	static public void palindroma(String cadena) {
+		String cadenaAux = "";
+		for (int i = cadena.length()-1; i >= 0; i--) {
+			cadenaAux += cadena.charAt(i);
+		}
+		if (cadena.compareToIgnoreCase(cadenaAux) == 0)
+			System.out.println("La cadena introducida es palindroma.");
+		else
+			System.out.println("La cadena no era palindroma.");
+	}
+```
+
+
+
+
+
 
 - *Ejecución*:
+
+
+```
+Introduce la cadena
+aa bb a b a bb aa
+La cadena introducida es palindroma.
+```
+
+
+
+
 
 10) (opcional) Resuelve el problema que tu compañer@ plantee.
 
-- *Enunciado de tu compañer@:*
+- *Enunciado de tu compañer@:* Haz una tabla de 10x10 con numeros enteros entre 1 y 9 de forma aleatoria. Suma filas y columnas por separado visualizando los  resultados por pantalla.
 
 - *Código de la solución*
 
+```java
+	public static void main(String[] args) {
+//		Haz una tabla de 10x10 con numeros enteros entre 1 y 9 de forma aleatoria.
+//		Suma filas y columnas por separado visualizando los  resultados por pantalla.
+	
+		
+		int sumafilas=0,sumacolumnas=0;
+		int [][] matriz = new int [10][10];
+
+		for (int i=0; i<matriz.length; i++){
+			for (int j=0; j<matriz[i].length; j++){
+				matriz [i][j]=(int)(Math.random() * 9 + 1);
+			}
+		}		
+		for (int i=0; i<matriz.length; i++){
+			System.out.println();
+			for (int j=0; j<matriz[i].length; j++){
+				sumafilas+=matriz[i][j];
+			}
+			System.out.println("La suma de la fila "+ (i+1) +" es "+ sumafilas);
+			sumafilas=0;
+		}
+		
+		System.out.println();
+
+		for (int i=0; i<matriz.length; i++){
+			System.out.println();
+			for (int j=0; j<matriz[i].length; j++){
+				sumacolumnas+=matriz[j][i];
+			}
+			System.out.println("La suma de la columna "+ (i+1) +" es "+ sumacolumnas);
+			sumacolumnas=0;
+		}
+	
+		
+	}
+```
+
 - *Ejecución*:
+```
+
+La suma de la fila 1 es 62
+
+La suma de la fila 2 es 60
+
+La suma de la fila 3 es 42
+
+La suma de la fila 4 es 51
+
+La suma de la fila 5 es 58
+
+La suma de la fila 6 es 48
+
+La suma de la fila 7 es 59
+
+La suma de la fila 8 es 59
+
+La suma de la fila 9 es 51
+
+La suma de la fila 10 es 50
+
+
+La suma de la columna 1 es 63
+
+La suma de la columna 2 es 49
+
+La suma de la columna 3 es 47
+
+La suma de la columna 4 es 59
+
+La suma de la columna 5 es 50
+
+La suma de la columna 6 es 59
+
+La suma de la columna 7 es 64
+
+La suma de la columna 8 es 60
+
+La suma de la columna 9 es 53
+
+La suma de la columna 10 es 36
+```
+

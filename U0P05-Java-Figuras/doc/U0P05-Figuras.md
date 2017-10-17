@@ -247,11 +247,144 @@ Queremos que todas las figuras tengan un título y un color. Para el color puede
 
 ##### Código de la clase Figura:
 
+
+
+```java
+package figuras;
+
+public abstract class Figura {
+	
+	public enum Clor {
+		AZUL, VERDE, AMARILLO, ROJO
+	};
+	Clor color;
+	private String titulo;
+
+	public abstract double area();
+
+	public abstract double perimetro();
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public Figura(String titulo, Clor color) {
+		this.titulo = titulo;
+		this.color=color;
+	}
+
+	@Override
+	public String toString() {
+		return "Figura [color=" + color + ", titulo=" + titulo + "]";
+	}
+
+}
+```
+
+
+
 ##### Código de la clase Cuadrado una vez modificada:
+
+```java
+package figuras;
+
+public class Cuadrado extends Figura{
+	private double lado;
+
+	public Cuadrado(String titulo, Clor color, double lado) {
+		super(titulo, color);
+		this.lado = lado;
+	}
+
+	@Override
+	public String toString() {
+		return super.toString() + " [lado=" + lado + ", perimetro=" + perimetro() + ", area=" + area() + "]";
+	}
+
+	public double getLado() {
+		return lado;
+	}
+
+	public void setLado(int lado) {
+		this.lado = lado;
+	}
+
+	@Override
+	public double area() {
+		// TODO Auto-generated method stub
+		return Math.pow(lado, 2);
+	}
+
+	@Override
+	public double perimetro() {
+		// TODO Auto-generated method stub
+		return (lado * 4);
+	}
+
+
+}
+```
+
+
+
+
 
 ##### Código del método main en la clase Principal:
 
+```java
+package figuras;
+
+import figuras.Figura.Clor;
+
+public class Problema {
+
+	public static void main(String[] args) {
+
+		Cuadrado cuad = new Cuadrado("Cuadrado", Clor.AMARILLO, 4.2);
+		Circunferencia circ1 = new Circunferencia("circ1", Clor.AZUL, 4.8);
+		Circunferencia circ2 = new Circunferencia("circ2", Clor.VERDE, 1.5);
+		Triangulo tri = new Triangulo("Triangulo", Clor.ROJO, 8, 15);
+
+		double areaTotal, perTotal;
+		areaTotal = cuad.area() + (circ1.area() / 2) + (circ2.area() * 0.75) + tri.area();
+		perTotal = (cuad.perimetro() * 0.75) + (circ1.perimetro() / 2) + 	(circ2.perimetro() * 0.75)
+				+ (tri.perimetro() - circ2.getRadio() * 2);
+
+		
+
+		System.out.println(cuad.toString());
+		System.out.println(circ1.toString());
+		System.out.println(circ2.toString());
+		System.out.println(tri.toString());
+
+		System.out.println("Area total: " + areaTotal);
+		System.out.println("Perimetro total: " + perTotal);
+
+	}
+
+}
+```
+
+
+
+
+
 ##### Ejecución del método main:
+
+```
+Figura [color=AMARILLO, titulo=Cuadrado]Cuadrado [lado=4.2, perimetro=16.8, area=17.64]
+Figura [color=AZUL, titulo=circ1]Circunferencia [radio=4.8, perimetro=0.0, area=0.0]
+Figura [color=VERDE, titulo=circ2]Circunferencia [radio=1.5, perimetro=0.0, area=0.0]
+Figura [color=ROJO, titulo=Triangulo]Triangulo [base=8.0, altura=15.0, perimetro=0.0, area=0.0]
+Area total: 119.13258497228719
+Perimetro total: 71.74822820780804
+```
+
+
 
 #### Parte 3: Colecciones
 
@@ -266,6 +399,101 @@ Queremos que todas las figuras tengan un título y un color. Para el color puede
 
 ##### Código de la clase GestorFiguras:
 
+````java
+package figuras;
+
+import java.util.ArrayList;
+
+public class GestorFiguras {
+
+	private ArrayList<Figura> listaFiguras;
+
+	public GestorFiguras() {
+		listaFiguras = new ArrayList<>();
+	}
+	
+	private Figura comprobarnombre(String nombre) {
+		for (Figura figura : listaFiguras)
+			if (figura.getTitulo().equals(nombre))
+				return figura;
+
+		return null;
+
+	}
+
+	public void anyadirFig(Figura figura) {
+
+		if (comprobarnombre(figura.getTitulo()) == null)
+			listaFiguras.add(figura);
+		else
+			System.out.println("No se ha podido añadir porque ya existia ese titulo.");
+	}
+
+	
+	public void borrarFigura (String titulo) {
+		if (comprobarnombre(titulo)!=null) 
+			listaFiguras.remove(comprobarnombre(titulo));
+			else
+			System.out.println("No existia ese titulo por lo que no se ha borrado.");
+			}
+	
+	public void mostrarFiguras () {
+		for (Figura figura : listaFiguras) 
+			System.out.println(figura.toString());
+		
+	}
+	
+		
+		public void sumaAreas() {
+			double total=0;
+		
+			for (Figura figura : listaFiguras) 
+				total+=figura.area();
+			
+			
+			System.out.println("La suma de todas las areas es "+total);
+			
+		}
+	
+
+}
+````
+
+
+
 ##### Código del método main en la clase Principal:
 
+```java
+package figuras;
+
+import figuras.Figura.Clor;
+
+public class Main {
+	public static void main(String[] args) {
+		Cuadrado cuad = new Cuadrado("Cuadrado", Clor.AMARILLO, 4.2);
+		Circunferencia circ2 = new Circunferencia("circ2", Clor.VERDE, 1.5);
+
+		GestorFiguras gestor = new GestorFiguras();
+
+		gestor.anyadirFig(cuad);
+		gestor.anyadirFig(circ2);
+		gestor.mostrarFiguras(); 
+		gestor.anyadirFig(cuad);
+		gestor.borrarFigura("Cuadrado");
+		gestor.sumaAreas();
+
+	}
+}
+```
+
+
+
 ##### Ejecución del método main:
+
+```
+Figura [color=AMARILLO, titulo=Cuadrado] [lado=4.2, perimetro=16.8, area=17.64]
+Figura [color=VERDE, titulo=circ2] [radio=1.5, perimetro=0.0, area=0.0]
+No se ha podido añadir porque ya existia ese titulo.
+La suma de todas las areas es 7.0685834705770345
+```
+

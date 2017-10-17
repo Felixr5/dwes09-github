@@ -1,6 +1,7 @@
 package figuras;
 
-public class Circunferencia {
+
+public class Circunferencia  extends Figura{
 	private double radio;
 	private double perimetro, area;
 
@@ -12,30 +13,30 @@ public class Circunferencia {
 		this.radio = radio;
 	}
 
-	public double getPerimetro() {
-		return perimetro;
-	}
 
-	public void setPerimetro(double perimetro) {
-		this.perimetro = perimetro;
-	}
 
-	public double getArea() {
-		return area;
-	}
-
-	public void setArea(double area) {
-		this.area = area;
-	}
-
-	public Circunferencia(double radio) {
+	public Circunferencia(String titulo, Clor color, double radio) {
+		super(titulo, color);
 		this.radio = radio;
 
 	}
 
 	@Override
 	public String toString() {
-		return "Circunferencia [radio=" + radio + ", perimetro=" + perimetro + ", area=" + area + "]";
+		return super.toString() + " [radio=" + radio + ", perimetro=" + perimetro + ", area=" + area + "]";
 	}
+
+	@Override
+	public double area() {
+		return Math.PI * Math.pow(radio, 2);
+	}
+
+	@Override
+	public double perimetro() {
+		return (2 * Math.PI * radio);
+	}
+	
+	
+	
 
 }
