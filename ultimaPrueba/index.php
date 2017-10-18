@@ -1,3 +1,21 @@
 <?php
-echo "<h1>funciona</h1>";
+$x=4;
+$y=5;
+
+echo "$x es la variable. $y es y\n <br>";
+
+$x += $y;
+echo '$x += $y' . ": $x es la variable x. $y es la variable y.\n <br>";
+
+$x -= $y;
+echo '$x -= $y' . ": $x es la variable x. $y es la variable y.\n <br>";
+
+$x *= $y;
+echo '$x *= $y' . ": $x es la variable x. $y es la variable y.\n <br>";
+
+$x /= $y;
+echo '$x /= $y' . ": $x es la variable x. $y es la variable y.\n <br>";
+
+$x .= $y;
+echo '$x .= $y' . ": $x es la variable x. $y es la variable y.";
 ?>
