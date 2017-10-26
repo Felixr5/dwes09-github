@@ -314,8 +314,9 @@ Thursday 19th of October 2017 02:06:27 PM
 
 
 ```php
+global $nu=1;
+
 function holamundo2() {
-    global $nu;
     echo "Hello world! $nu";
 }
 holamundo2();

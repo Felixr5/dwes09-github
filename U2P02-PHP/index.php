@@ -2,7 +2,6 @@
 <html>
 <head>
 <meta charset="UTF-8" />
-<title>Último ejemplo de PHP</title>
 </head>
 <body>
 <?php
