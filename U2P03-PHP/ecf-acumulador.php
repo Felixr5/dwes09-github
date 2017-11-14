@@ -12,7 +12,7 @@ if (! isset($_POST['Enviar'])) {
     $ac=0;
  }
         if ($_POST['ac']<50) {
-            echo " <h3>Aun no se ha llegado a 50 </h3>";
+            echo " <h3>Aun no se ha llegado a 50</h3>";
             
         ?>
     
