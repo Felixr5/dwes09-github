@@ -29,7 +29,7 @@ else
 </head>
 <body>
 
-<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"], ENT_QUOTES, "UTF-8");?>" method="post">
     <label>Escribe tu nombre para dirigirnos a ti:</label>
     <input type="text" name="nombre"><br/>
     <input type="submit" value="Enviar" name="enviar">
