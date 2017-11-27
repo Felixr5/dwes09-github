@@ -1,21 +1,22 @@
 <?php
-if (isset($_POST['enviar']) && session_status() == PHP_SESSION_NONE) {
-        session_name('P08');
-        session_start();
-    }
-    if (isset($_REQUEST["deNuevo"])) {
-        $_SESSION=array();
-    }
+ session_name('P08');
+  session_start();
 
-if (session_status () != PHP_SESSION_NONE)
+if (isset($_POST['enviar'])) {
+	$_SESSION['nombre']=$_POST['nombre'];
     header("Location: index.php");
+    }
+if (isset($_REQUEST["deNuevo"])) {
+        $_SESSION=array();
+     }
+
+     if (isset($_SESSION['nombre']))
+      header("Location: index.php");
   
     
     
     
     if (isset($_POST['nombre'])) {
-        $_SESSION['nombre']=$_POST['nombre'];
-        header("Location: index.php");
     }
     
  ?>
