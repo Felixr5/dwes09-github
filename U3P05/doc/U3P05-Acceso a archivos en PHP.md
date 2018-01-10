@@ -86,6 +86,8 @@ fclose($archivo);
 
 * Ahora muestra el contenido del archivo utilizando la función que has creado. Recuerda que es imprescindible abrir de nuevo el fichero para lectura: el puntero ha quedado al final del archivo y ya no habría nada que leer.
    Comprueba el resultado. ¿Se mantiene el texto original?
+![Captura](/imgs/Captura.PNG)
+
 * Recupera el contenido original del archivo *modulos.txt*, y repite la ejecución del código anterior sustituyendo "w" por "r+" (lectura y escritura con el puntero al inicio) en el parámetro de `fopen`. ¿Entiendes bien lo que ha ocurrido?
 * Recupera el contenido original del archivo *modulos.txt*, y repite la ejecución del código anterior sustituyendo "w" por "a" (append). Comprueba que ahora sale bien
 * Codifica un ejemplo en el que se escriban datos en un archivo *nuevo.txt* que previamente no existía.
