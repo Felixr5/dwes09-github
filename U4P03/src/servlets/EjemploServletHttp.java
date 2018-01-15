@@ -1,4 +1,4 @@
-package PrimerServlet;
+package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,14 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class PrimerServlet
  */
-@WebServlet("/Bienvenida")
-public class PrimerServlet extends HttpServlet {
+@WebServlet(urlPatterns={"/EjemploServletHttp","/SampleHttpServlet"}, loadOnStartup=1)
+
+public class EjemploServletHttp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PrimerServlet() {
+    public EjemploServletHttp() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -46,5 +47,7 @@ public class PrimerServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
+	public void init() {
+	    log("Iniciando el servlet HTTP");
+	  }
 }
