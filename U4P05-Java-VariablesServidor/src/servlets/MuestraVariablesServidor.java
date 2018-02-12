@@ -15,12 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import sun.font.EAttribute;
 
-@WebServlet(name="MuestraVariablesServidor",
-		initParams={
-				@WebInitParam(name = "servlet1", value = "12"),
-				@WebInitParam(name = "servlet2", value = "12") 
-		}
-)
+@WebServlet(name = "MuestraVariablesServidor", initParams = { @WebInitParam(name = "servlet1", value = "12"),
+		@WebInitParam(name = "servlet2", value = "102") })
 public class MuestraVariablesServidor extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -29,9 +25,9 @@ public class MuestraVariablesServidor extends HttpServlet {
 			throws ServletException, IOException {
 		request.setAttribute("fecha", new Date());
 		request.setAttribute("autor", "Tu Nombre");
-        response.setContentType("text/html");
-        response.setCharacterEncoding("UTF-8");
-        response.setHeader("Alumno:", "Felix");
+		response.setContentType("text/html");
+		response.setCharacterEncoding("UTF-8");
+		response.setHeader("Alumno:", "Felix");
 		PrintWriter out = response.getWriter();
 		out.println("<html><head><meta charset='UTF-8'/><title>Variables servidor</title></head>"
 				+ "<style>table,td {border:solid 1px black;}</style></head>");
@@ -63,57 +59,44 @@ public class MuestraVariablesServidor extends HttpServlet {
 		out.println("<tr><td>Directorio de DESPLIEGUE</td><td>" + contexto.getRealPath("/") + "</td></tr>");
 		out.println("<tr><td>Nombre de la aplicación</td><td>" + contexto.getServletContextName() + "</td></tr>");
 		out.println("</table>");
-		
-		out.println("<h3>Nombre contexto /"+ contexto.getServletContextName() +"</h3>");
-out.println("Variable de contexto "+contexto.getInitParameter("srv_bd"));
+
+		out.println("<h3>Nombre contexto /" + contexto.getServletContextName() + "</h3>");
+		out.println("Variable de contexto " + contexto.getInitParameter("srv_bd"));
 		out.println("<h3>Variables init</h3>");
 		out.println("<table style='border-collapse: collapse;margin:10px'>");
 		out.println("<tr><td><b>Variable</b></td><td><b>Valor</b></td></tr>");
-		out.println("<tr><td>Variable1</td><td>" + this.getInitParameter("servlet1")+ "</td></tr>");
-		out.println("<tr><td>Variable2</td><td>" + this.getInitParameter("servlet2")+ "</td></tr>");
-		out.println("<tr><td>Variable3</td><td>" + this.getInitParameter("servlet3")+ "</td></tr>");
-		out.println("<tr><td>Variable4</td><td>" + this.getInitParameter("servlet4")+ "</td></tr>");
+		out.println("<tr><td>Variable1</td><td>" + this.getInitParameter("servlet1") + "</td></tr>");
+		out.println("<tr><td>Variable2</td><td>" + this.getInitParameter("servlet2") + "</td></tr>");
+		out.println("<tr><td>Variable3</td><td>" + this.getInitParameter("servlet3") + "</td></tr>");
+		out.println("<tr><td>Variable4</td><td>" + this.getInitParameter("servlet4") + "</td></tr>");
 		out.println("</table>");
-		
+
 		out.println("El servidor de bases de datos que utilizaremos es " + contexto.getInitParameter("srv_bd"));
 		out.println("El valor del parámetro de servlet 1 es " + this.getInitParameter("servlet1"));
 
-		
-		Enumeration<String> req =request.getParameterNames();
-		
+		Enumeration<String> req = request.getParameterNames();
+
 		out.println("<h3>Parámetros de la request</h3>");
 		out.println("<table style='border-collapse: collapse;margin:10px'>");
 		out.println("<tr><td>Parametros</td><td>" + "</td></tr>");
-                                                                    	
+
 		while (req.hasMoreElements()) {
-			String reqq =req.nextElement();
-		out.println("<tr><td>"+reqq+"</td><td>" + request.getParameter(reqq)+ "</td></tr>");
+			String reqq = req.nextElement();
+			out.println("<tr><td>" + reqq + "</td><td>" + request.getParameter(reqq) + "</td></tr>");
 		}
-		out.println("</table>"); 
-		
-		
-		
-		
-		Enumeration<String> req2 =request.getAttributeNames();
+		out.println("</table>");
+
+		Enumeration<String> req2 = request.getAttributeNames();
 		out.println("<h3>Atributos de la request</h3>");
 		out.println("<table style='border-collapse: collapse;margin:10px'>");
 		out.println("<tr><td>Atributos</td><td>" + "</td></tr>");
-                                                                    	
+
 		while (req2.hasMoreElements()) {
-			String reqq2 =req2.nextElement();	
-		out.println("<tr><td>"+reqq2+"</td><td>" + request.getAttribute(reqq2)+ "</td></tr>");
+			String reqq2 = req2.nextElement();
+			out.println("<tr><td>" + reqq2 + "</td><td>" + request.getAttribute(reqq2) + "</td></tr>");
 		}
-		out.println("</table>"); 
-		 
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		out.println("</table>");
+
 		out.close();
 	}
 }

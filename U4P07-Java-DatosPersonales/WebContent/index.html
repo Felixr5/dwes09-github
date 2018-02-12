@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Inicio</title>
+</head>
+<body>
+<form action="/U4P07-Java-DatosPersonales/ValidarFormulario" method="post">
+
+Nombre: <input type="text" name="nombre"><br>
+Fecha de nacimiento: <input type="date" name="fecha"><br>
+Contraseña: <input type="password" name="clave"><br>
+
+<fieldset style=width:10%;>
+<legend>Sexo:</legend>
+
+Hombre<input type="radio" name="sexo" value="h">
+ 	Mujer<input type="radio" name="sexo" value="m">
+ 	Otro<input type="radio" name="sexo" value="o"><br>
+ 	</fieldset>
+Estado Civil  <select name="civil">
+<option value="cas">Casado/a</option>
+  <option value="sol">Soltero/a</option>
+    <option value="viu">Viudo/a</option>
+</select><br>
+Hijos  <input type="number" name="hijo"><br>
+Descripción<br><textarea name="text" rows="4" cols="50">
+</textarea><br>
+<input type="submit" value="Enviar"><br>
+
+</form>
+</body>
+</html>
