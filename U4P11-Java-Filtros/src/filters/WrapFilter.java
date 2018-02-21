@@ -20,12 +20,12 @@ import sun.print.PrinterJobWrapper;
 @WebFilter("/WrapFilter")
 public class WrapFilter implements Filter {
 
-    /**
-     * Default constructor. 
-     */
-    public WrapFilter() {
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * Default constructor.
+	 */
+	public WrapFilter() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
@@ -37,16 +37,18 @@ public class WrapFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		// place your code here
 		ServletContext context = request.getServletContext();
 		PrintWriter out = response.getWriter();
 		out.println("<html>");
 		out.println("<head>");
-		if(context.getAttribute("contador")!=null) {
-			int contador=Integer.parseInt((context.getAttribute("contador").toString()));
-			out.println("<title>Visitas:"+contador+"</title>");}
+		if (context.getAttribute("contador") != null) {
+			int contador = Integer.parseInt((context.getAttribute("contador").toString()));
+			out.println("<title>Visitas:" + contador + "</title>");
+		}
 		out.println("<meta charset='UTF-8'/>");
 		out.println("</head>");
 		out.println("<body>");
@@ -54,9 +56,8 @@ public class WrapFilter implements Filter {
 		out.println("<p>Felix Rojo</p>");
 		out.println("</body>");
 		out.println("<footer>");
-		
-		out.println("</footer></html>");
-		
+		 out.println("</footer></html>");
+
 	}
 
 	/**
