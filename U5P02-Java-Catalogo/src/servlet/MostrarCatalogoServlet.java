@@ -39,11 +39,11 @@ public class MostrarCatalogoServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
-
+		String consulta = "";
 		try {
 			Cancion cancion;
-			
-			//Variables para pasar parametros, (sin una sesion)
+
+			// Variables para pasar parametros, (sin una sesion)
 			String aut = "";
 			String res = "";
 			String can = "";
@@ -52,7 +52,6 @@ public class MostrarCatalogoServlet extends HttpServlet {
 			String busqueda = "";
 			String order = "nombre"; // Se ordena por nombre de forma predeterminada
 
-			ServletContext contexto = getServletContext();
 			response.setContentType("text/html;UTF-8");
 			Connection conn = null;
 			Statement sentencia = null;
@@ -66,10 +65,11 @@ public class MostrarCatalogoServlet extends HttpServlet {
 			conn = DriverManager.getConnection(url, userName, password);
 			// Paso 3: Crear sentencias SQL, utilizando objetos de tipo Statement
 			sentencia = conn.createStatement();
-	
 
-			////////////////////////////////// 
-
+			//////////////////////////////////
+			// Quitar filtros.
+			if (request.getParameterMap().containsKey("filtro"))
+				response.sendRedirect("./MostrarCatalogo");
 			// Autor
 
 			if (request.getParameterMap().containsKey("aut")) {
@@ -79,12 +79,6 @@ public class MostrarCatalogoServlet extends HttpServlet {
 			// La consulta se podria hacer con * en lugar de todos los nombres,
 			// pero poniendo los nombres, al usar el rset, se puede poner el nombre que le
 			// hemos dado.
-			String consulta = "SELECT canciones.ID_CANCION as id,canciones.ID_ALBUM, canciones.NOMBRE as nombre, albums.nombre as album, autores.nombre as autor,autores.ID_AUTOR as idAut,canciones.duracion as DURACION"
-					+ " FROM canciones,autores,albums"
-					+ " where autores.ID_AUTOR=canciones.ID_AUTOR and canciones.ID_ALBUM=albums.ID_ALBUM " + busqueda
-					+ filtro + " order by " + order;
-			ResultSet rset = sentencia.executeQuery(consulta);
-			String consulta2;
 
 			// Botones de arriba y abajo deshabilitados si es la opcion elegida
 
@@ -128,6 +122,29 @@ public class MostrarCatalogoServlet extends HttpServlet {
 
 			//////////////////////////////////////////////////
 
+			////////////////////////////// 77
+
+			// Busqueda
+			if (request.getParameterMap().containsKey("can")) {
+				can = "&can=" + request.getParameter("can");
+				String[] split;
+				split = request.getParameter("can").split(" ");
+				busqueda = " and (";
+				for (int i = 0; i < split.length; i++) {
+					if (i == (split.length - 1))
+						busqueda += " canciones.nombre like \"%" + split[i] + "%\""; // Si es el ultimo no se pone el or.
+					else
+						busqueda += " canciones.nombre like \"%" + split[i] + "%\" or";
+
+				}
+				busqueda+=")";
+			}
+			consulta = "SELECT canciones.ID_CANCION as id,canciones.ID_ALBUM, canciones.NOMBRE as nombre, albums.nombre as album, autores.nombre as autor,autores.ID_AUTOR as idAut,canciones.duracion as DURACION"
+					+ " FROM canciones,autores,albums"
+					+ " where autores.ID_AUTOR=canciones.ID_AUTOR and canciones.ID_ALBUM=albums.ID_ALBUM " + busqueda
+					+ filtro + " order by " + order;
+			ResultSet rset = sentencia.executeQuery(consulta);
+			String consulta2;
 			// Autor
 			if (request.getParameterMap().containsKey("aut")) {
 				aut = "&aut=" + request.getParameter("aut");
@@ -137,25 +154,8 @@ public class MostrarCatalogoServlet extends HttpServlet {
 					out.println("<p>No hay autores en la base de datos</p>");
 				}
 				if (rset2.next())
-					out.println("<div><img src=./img/" + rset2.getString("FOTO") + " height=150 /></div>");
+					out.println("<div style=float:left><img src=./img/" + rset2.getString("FOTO") + " height=150 /></div>");
 			}
-			////////////////////////////// 77
-
-			// Busqueda
-			if (request.getParameterMap().containsKey("can")) {
-				can = "&can=" + request.getParameter("can");
-				String[] split;
-				split = request.getParameter("can").split(" ");
-
-				for (int i = 0; i < split.length; i++) {
-					if (i == (split.length - 1))
-						busqueda += " and cancion.nombre like %" + split[i] + "%"; // Si es el ultimo no se pone el or.
-					else
-						busqueda += " and cancion.nombre like %" + split[i] + "% or";
-
-				}
-			}
-
 			/////////////
 			// footer
 			out.println("<style type='text/css'>");
@@ -174,7 +174,7 @@ public class MostrarCatalogoServlet extends HttpServlet {
 			out.println("<html><head><meta charset='UTF-8'/></head><body>");
 
 			// Tabla (Con ordenacion, variables arriba)
-			out.println("<table style='border: 0'>");
+			out.println("<table style=float:left;border: 0'>");
 			out.println("<tr style='background-color: whitesmoke'>");
 
 			out.println("<th>Nombre <a " + naz + aut + can + ">&#9652</a>"); // Nombre AZ
@@ -203,17 +203,10 @@ public class MostrarCatalogoServlet extends HttpServlet {
 						+ cancion.getID_AUTOR() + can + res + ">" + rset.getString("autor") + "</a></td></tr>");
 			}
 
-			// Quitar filtros.
-			if (request.getParameterMap().containsKey("filtro")) {
-
-				response.sendRedirect("./MostrarCatalogo");
-			}
 			////////////////////
-
-			///////////////
 			// Navegacion
 
-			out.println("<footer> <p><form action=" + contexto.getContextPath() + res + aut + " method=post>"
+			out.println("<footer> <p><form action=./MostrarCatalogo?" + res + aut + " method=post>"
 					+ "<label>Introduce el nombre de la cancion a buscar..</label><input type=text name=can >"
 					+ "<input type=submit></form></p>");
 			out.println("<a href=./MostrarCatalogo?filtro=0 >Eliminar filtros.</a>");
@@ -222,6 +215,7 @@ public class MostrarCatalogoServlet extends HttpServlet {
 
 		} catch (Exception e) {
 			out.print("Ha habido un error.");
+			out.println(consulta);
 
 		}
 	}
