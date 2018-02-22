@@ -162,8 +162,7 @@ while ($cancion = $resultado->fetch_assoc()) {
         echo "<td><a href=MostrarCatalogo.php?idAut=$cancion[idAut] >" . $cancion["autor"] . "</td>\n";
         echo "<td>" . $cancion['album'] . "</td>\n";
         echo "</tr>";
-    }
-else {
+    }else {
     $resultado1 = $conexion->query("SELECT canciones.ID_CANCION as id, canciones.NOMBRE as nombre, albums.nombre as album, autores.nombre as autor,autores.ID_AUTOR as idAut
 FROM canciones,autores,albums
  where canciones.NOMBRE like '%". $_POST['can'] ."%' and autores.ID_AUTOR=canciones.ID_AUTOR and canciones.ID_ALBUM=albums.ID_ALBUM order by ".$order);
