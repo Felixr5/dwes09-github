@@ -99,9 +99,9 @@ public class MostrarCuidadorServlet extends HttpServlet {
 					}
 					out.println("</ul>");
 				}
-				out.println("<footer> <p><a href=./U5P01-Java-BBDD/ModificarAnimalServlet>Modificar Animal</a></p>"
-						+ 	"<p><a href=./U5P01-Java-BBDD/MostrarAnimales>Modificar Animales</a></p>"
-						+ 	"<p><a href=./U5P01-Java-BBDD/MostrarCuidadores>Mostrar Cuidadores</a></p>"
+				out.println("<footer> <p><a href=./ModificarAnimalServlet>Modificar Animal</a></p>"
+						+ 	"<p><a href=./MostrarAnimales>Mostrar Animales</a></p>"
+						+ 	"<p><a href=./MostrarCuidadores>Mostrar Cuidadores</a></p>"
 						+ 	"</footer>");
 				// Paso 6: Desconexión
 				if (sentencia != null)

@@ -73,8 +73,8 @@ public class MostrarCuidadoresServlet extends HttpServlet {
 							+ rset.getString("idCuidador") + "'>" + rset.getString("Nombre") + "</a></td></tr>");
 				}
 				out.println("</tbody></table>");
-				out.println("<footer> <p><a href=./U5P01-Java-BBDD/ModificarAnimalServlet>Modificar Animal</a></p>"
-						+ 	"<p><a href=./U5P01-Java-BBDD/MostrarAnimales>Modificar Animales</a></p>"
+				out.println("<footer> <p><a href=./ModificarAnimal>Modificar Animal</a></p>"
+						+ 	"<p><a href=./MostrarAnimales>Mostrar Animales</a></p>"
 						+ 	"</footer>");
 
 			}

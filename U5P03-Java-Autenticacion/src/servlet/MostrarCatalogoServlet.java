@@ -5,7 +5,10 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import objetos.Cancion;
+import model.Cancion;
+import model.Usuario;
+import model.Autor;
+import model.Album;
 import java.sql.Statement;
 
 import javax.servlet.RequestDispatcher;
@@ -15,11 +18,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class MostrarCatalogoServlet
  */
-@WebServlet("/MostrarCatalogo")
+@WebServlet(urlPatterns= {"/MostrarCatalogo","","/Catalogo"})
 public class MostrarCatalogoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -207,7 +211,11 @@ public class MostrarCatalogoServlet extends HttpServlet {
 
 			////////////////////
 			// Navegacion
-
+			HttpSession session = request.getSession();
+			Usuario usuario = (Usuario) session.getAttribute("usuario");
+			out.println("<h4>Sesión iniciada como <a href='"+request.getRequestURI()+"/Cuenta'>" 
+				+ usuario.getNombre() + "</a></h4>");
+			out.println("</body></html>");
 			out.println("<footer> <p><form action=./MostrarCatalogo?" + res + aut + " method=post>"
 					+ "<label>Introduce el nombre de la cancion a buscar..</label><input type=text name=can >"
 					+ "<input type=submit></form></p>");

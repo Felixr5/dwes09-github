@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ModificarAnimalServlet
  */
-@WebServlet("/ModificarAnimalServlet")
+@WebServlet("/ModificarAnimal")
 public class ModificarAnimalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -40,6 +40,7 @@ public class ModificarAnimalServlet extends HttpServlet {
 		out.println("<html><head><meta charset='UTF-8'/></head><body>");
 		Connection conn = null;
 		Statement sentencia = null;
+		
 		try {
 			// Paso 1: Cargar el driver JDBC.
 			Class.forName("org.mariadb.jdbc.Driver").newInstance();
@@ -76,8 +77,8 @@ public class ModificarAnimalServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		out.println("<footer> <p><a href=./U5P01-Java-BBDD/MostrarAnimales>Modificar Animales</a></p>"
-				+ 	"<p><a href=./U5P01-Java-BBDD/MostrarCuidadores>Mostrar Cuidadores</a></p>"
+		out.println("<footer> <p><a href=./MostrarAnimales>Mostrar Animales</a></p>"
+				+ 	"<p><a href=./MostrarCuidadores>Mostrar Cuidadores</a></p>"
 				+ 	"</footer>");
 		out.println("</body></html>");
 	}   

@@ -70,7 +70,7 @@ public class MostrarAnimalesServlet extends HttpServlet {
 				out.println("<h3>No hay resultados</p>");
 			else
 				while (rset.next()) {
-					out.println("<p>" + rset.getString("nombre") + ", " + rset.getString("especie") + "</p>");
+					out.println("<p>" + rset.getString("nombre") + ", " + rset.getString("especie") + " <img src='./img/" + rset.getString("imagen") + "' height=150px/></p>");
 				}
 
 			// Paso 6: Desconexión
@@ -81,8 +81,9 @@ public class MostrarAnimalesServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		out.println("<footer> <p><a href=./U5P01-Java-BBDD/ModificarAnimalServlet>Modificar Animal</a></p>"
-				+ 	"<p><a href=./U5P01-Java-BBDD/MostrarCuidadores>Mostrar Cuidadores</a></p>"
+		
+		out.println("<br><br><br><br><br><footer> <p><a href=./ModificarAnimal>Modificar Animal</a></p>"
+				+ 	"<p><a href=./MostrarCuidadores>Mostrar Cuidadores</a></p>"
 				+ 	"</footer>");
 		out.println("</body></html>");
 	}
