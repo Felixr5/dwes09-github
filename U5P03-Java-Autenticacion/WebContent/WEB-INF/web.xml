@@ -17,6 +17,7 @@
     <param-value>jdbc:mariadb://localhost/catalogo09</param-value>
   </context-param>
   <filter>
+ 
     <filter-name>WrapFilter</filter-name>
     <filter-class>filters.WrapFilter</filter-class>
   </filter>
